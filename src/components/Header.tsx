@@ -3,6 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { Menu } from "lucide-react"
+import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -36,7 +37,13 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Farmasi Alde</span>
-            <img className="h-8 w-auto" src="/images/asset-16.svg" alt="Farmasi Alde" />
+            <Image
+              src="/images/farmasialde-logo.svg"
+              alt="Farmasi Alde"
+              width={150}
+              height={40}
+              priority
+            />
           </Link>
         </div>
         <div className="flex lg:hidden">

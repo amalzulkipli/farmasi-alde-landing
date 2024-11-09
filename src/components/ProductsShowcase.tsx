@@ -40,7 +40,7 @@ export default function ProductsShowcase() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <div
               key={product.name}
               className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"

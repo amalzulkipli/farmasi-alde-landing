@@ -45,7 +45,7 @@ export default function ValueProposition() {
                   Everything you need for your health and wellness
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-white/80">
-                  At Farmasi Alde, we're committed to providing comprehensive healthcare solutions with a personal touch. Our dedicated team ensures you receive the best care possible.
+                  At Farmasi Alde, we&apos;re committed to providing comprehensive healthcare solutions with a personal touch. Our dedicated team ensures you receive the best care possible.
                 </p>
               </div>
               
