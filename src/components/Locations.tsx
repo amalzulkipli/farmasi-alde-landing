@@ -11,9 +11,9 @@ const locations = [
     phone: '017-874 8600',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.6583359372897!2d101.61370737475506!3d2.8302289975076087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb98c7c164589%3A0x9520d98c8143c0e8!2sFarmasi%20Alde%20Bukit%20Changgang!5e0!3m2!1sen!2smy!4v1684304454305!5m2!1sen!2smy',
     social: {
-      facebook: 'https://www.facebook.com/farmasialde.bukitchanggang',
-      instagram: 'https://www.instagram.com/farmasialde.bukitchanggang/',
-      tiktok: 'https://www.tiktok.com/@farmasialde.bukitchanggang'
+      facebook: 'https://www.facebook.com/farmasialde/',
+      instagram: 'https://www.instagram.com/farmasialdebc/',
+      tiktok: 'https://www.tiktok.com/@farmasialdebc'
     }
   },
   {
@@ -23,9 +23,9 @@ const locations = [
     phone: '017-214 0488',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.0524839288395!2d101.71841607475458!3d2.8052360975132387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdc7581150b3c1%3A0x809c926d5426b6d8!2sFarmasi%20Alde%20Salak%20Tinggi!5e0!3m2!1sen!2smy!4v1684304391717!5m2!1sen!2smy',
     social: {
-      facebook: 'https://www.facebook.com/farmasialde.salaktinggi',
-      instagram: 'https://www.instagram.com/farmasialde.salaktinggi/',
-      tiktok: 'https://www.tiktok.com/@farmasialde.salaktinggi'
+      facebook: 'https://www.facebook.com/farmasialde.salaktinggi/',
+      instagram: 'https://www.instagram.com/farmasialdest/',
+      tiktok: 'https://www.tiktok.com/@farmasi.alde.sala'
     }
   },
 ]

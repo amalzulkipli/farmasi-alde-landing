@@ -1,20 +1,13 @@
 "use client"
 
-import { Facebook, Instagram, Twitter } from "lucide-react"
 import Link from "next/link"
 
 const navigation = {
   main: [
-    { name: 'About', href: '#' },
+    { name: 'Values', href: '#values' },
     { name: 'Services', href: '#services' },
     { name: 'Products', href: '#products' },
     { name: 'Locations', href: '#locations' },
-    { name: 'Contact', href: '#contact' },
-  ],
-  social: [
-    { name: 'Facebook', href: '#', icon: Facebook },
-    { name: 'Instagram', href: '#', icon: Instagram },
-    { name: 'Twitter', href: '#', icon: Twitter },
   ],
 }
 
@@ -31,14 +24,6 @@ export default function Footer() {
             </div>
           ))}
         </nav>
-        <div className="mt-10 flex justify-center space-x-10">
-          {navigation.social.map((item) => (
-            <Link key={item.name} href={item.href} className="text-gray-400 hover:text-primary">
-              <span className="sr-only">{item.name}</span>
-              <item.icon className="h-6 w-6" aria-hidden="true" />
-            </Link>
-          ))}
-        </div>
         <p className="mt-10 text-center text-xs leading-5 text-gray-400">
           &copy; {new Date().getFullYear()} Farmasi Alde. All rights reserved.
         </p>
