@@ -24,9 +24,17 @@ export default function Footer() {
             </div>
           ))}
         </nav>
-        <p className="mt-10 text-center text-xs leading-5 text-gray-400">
-          &copy; {new Date().getFullYear()} Farmasi Alde. All rights reserved.
-        </p>
+        <div className="mt-10 text-center">
+          <p className="text-sm leading-5 text-gray-400">
+            ALDE ALL STAR SDN. BHD.
+          </p>
+          <p className="text-xs leading-5 text-gray-400 mt-1">
+            202401005279 (1551129-D)
+          </p>
+          <p className="text-xs leading-5 text-gray-400 mt-4">
+            &copy; {new Date().getFullYear()} Farmasi Alde. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   )
