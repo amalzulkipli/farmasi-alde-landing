@@ -107,9 +107,9 @@ export default function PoisonScheduleSearch() {
             }
             setFilterCounts(counts)
           },
-          error: () => setError("Error parsing poison schedule data")
+          error: (parseError) => setError("Error parsing poison schedule data")
         })
-      } catch (error) {
+      } catch (err) {
         setError("Failed to load poison schedule data")
       } finally {
         setLoading(false)
@@ -427,7 +427,7 @@ export default function PoisonScheduleSearch() {
                     </div>
                     <h3 className="text-lg font-semibold mb-2 text-slate-900">No Results Found</h3>
                     <p className="text-slate-600 mb-4">
-                      We couldn't find any poisons matching your criteria.
+                      We couldn&apos;t find any poisons matching your criteria.
                     </p>
                     <div className="space-y-2 text-sm text-slate-500">
                       <p>Try:</p>

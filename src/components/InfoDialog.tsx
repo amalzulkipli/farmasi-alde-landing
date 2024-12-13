@@ -25,7 +25,7 @@ export function InfoDialog() {
         <DialogHeader>
           <DialogTitle>About First Schedule Poisons List</DialogTitle>
           <DialogDescription>
-            Understanding Malaysia's Poison Classification System
+            Understanding Malaysia&apos;s Poison Classification System
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 text-slate-600">
