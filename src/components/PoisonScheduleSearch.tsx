@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Search, ChevronDown, ChevronUp, ArrowUp, AlertCircle, Loader2, X } from 'lucide-react'
+import { Search, ChevronDown, ChevronUp, ArrowUp, AlertCircle, Loader2, X, Plus, Circle, Ban } from 'lucide-react'
 import Papa from "papaparse"
 import {
   Card,
@@ -38,12 +38,15 @@ interface PoisonData {
 
 const CSV_URL = "/data/first-schedule-poisons-04.02.2015.csv"
 
-const GROUPS = [
-  { id: "groupA", label: "Group A" },
-  { id: "groupB", label: "Group B" },
-  { id: "groupC", label: "Group C" },
-  { id: "groupD", label: "Group D" },
-]
+const FILTER_GROUPS = [
+  { id: "groupA", label: "Group A", icon: Circle },
+  { id: "groupB", label: "Group B", icon: Circle },
+  { id: "groupC", label: "Group C", icon: Circle },
+  { id: "groupD", label: "Group D", icon: Circle },
+  { id: "exempt", label: "Exempt", icon: Ban },
+] as const
+
+type FilterGroup = typeof FILTER_GROUPS[number]["id"]
 
 export default function PoisonScheduleSearch() {
   const [searchTerm, setSearchTerm] = React.useState("")
@@ -53,7 +56,14 @@ export default function PoisonScheduleSearch() {
   const [expandedItem, setExpandedItem] = React.useState<number | null>(null)
   const [showScrollTop, setShowScrollTop] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
-  const [selectedGroups, setSelectedGroups] = React.useState<string[]>([])
+  const [selectedFilters, setSelectedFilters] = React.useState<FilterGroup[]>([])
+  const [filterCounts, setFilterCounts] = React.useState<Record<FilterGroup, number>>({
+    groupA: 0,
+    groupB: 0,
+    groupC: 0,
+    groupD: 0,
+    exempt: 0,
+  })
 
   const searchInputRef = React.useRef<HTMLInputElement>(null)
   const resultsRef = React.useRef<HTMLDivElement>(null)
@@ -86,6 +96,16 @@ export default function PoisonScheduleSearch() {
             const data = results.data.slice(1)
             setPoisonData(data)
             setFilteredData(data)
+            
+            // Calculate initial filter counts
+            const counts = {
+              groupA: data.filter(item => item[""] && item[""] !== "-").length,
+              groupB: data.filter(item => item["Part 1"] && item["Part 1"] !== "-").length,
+              groupC: data.filter(item => item["_1"] && item["_1"] !== "-").length,
+              groupD: data.filter(item => item["_2"] && item["_2"] !== "-").length,
+              exempt: data.filter(item => item.Exempt && item.Exempt !== "-").length,
+            }
+            setFilterCounts(counts)
           },
           error: () => setError("Error parsing poison schedule data")
         })
@@ -103,25 +123,33 @@ export default function PoisonScheduleSearch() {
     setExpandedItem(null)
     const filtered = poisonData.filter(item => {
       const matchesSearch = item.Names.toLowerCase().includes(searchTerm.toLowerCase())
-      if (selectedGroups.length === 0) return matchesSearch
-      const hasGroupA = selectedGroups.includes("groupA") && item[""] && item[""] !== "-"
-      const hasGroupB = selectedGroups.includes("groupB") && item["Part 1"] && item["Part 1"] !== "-"
-      const hasGroupC = selectedGroups.includes("groupC") && item["_1"] && item["_1"] !== "-"
-      const hasGroupD = selectedGroups.includes("groupD") && item["_2"] && item["_2"] !== "-"
-      return matchesSearch && (hasGroupA || hasGroupB || hasGroupC || hasGroupD)
+      
+      if (selectedFilters.length === 0) return matchesSearch
+
+      const hasGroupA = selectedFilters.includes("groupA") && item[""] && item[""] !== "-"
+      const hasGroupB = selectedFilters.includes("groupB") && item["Part 1"] && item["Part 1"] !== "-"
+      const hasGroupC = selectedFilters.includes("groupC") && item["_1"] && item["_1"] !== "-"
+      const hasGroupD = selectedFilters.includes("groupD") && item["_2"] && item["_2"] !== "-"
+      const hasExempt = selectedFilters.includes("exempt") && item.Exempt && item.Exempt !== "-"
+
+      return matchesSearch && (hasGroupA || hasGroupB || hasGroupC || hasGroupD || hasExempt)
     })
     setFilteredData(filtered)
-  }, [searchTerm, selectedGroups, poisonData])
+  }, [searchTerm, selectedFilters, poisonData])
 
-  const toggleGroup = (groupId: string) => {
-    setSelectedGroups(prev => {
-      const isSelected = prev.includes(groupId)
-      return isSelected ? prev.filter(id => id !== groupId) : [...prev, groupId]
+  const toggleFilter = (filterId: FilterGroup) => {
+    setSelectedFilters(prev => {
+      const isSelected = prev.includes(filterId)
+      return isSelected ? prev.filter(id => id !== filterId) : [...prev, filterId]
     })
   }
 
+  const removeFilter = (filterId: FilterGroup) => {
+    setSelectedFilters(prev => prev.filter(id => id !== filterId))
+  }
+
   const resetFilters = () => {
-    setSelectedGroups([])
+    setSelectedFilters([])
   }
 
   const scrollToTop = () => {
@@ -147,7 +175,7 @@ export default function PoisonScheduleSearch() {
 
     return (
       <section>
-        <h4 className="text-sm font-semibold uppercase tracking-wide text-blue-600 mb-3">
+        <h4 className="text-sm font-semibold uppercase tracking-wide text-[#00aced] mb-3">
           Part 1
         </h4>
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
@@ -155,7 +183,7 @@ export default function PoisonScheduleSearch() {
             <React.Fragment key={group.label}>
               <div className="flex p-4">
                 <div className="w-1/4">
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                  <Badge variant="secondary" className="bg-[#00aced]/10 text-[#00aced]">
                     {group.label}
                   </Badge>
                 </div>
@@ -171,9 +199,9 @@ export default function PoisonScheduleSearch() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 md:p-8">
-      <Card className="max-w-5xl mx-auto border-blue-200/30">
+      <Card className="max-w-5xl mx-auto border-[#00aced]/30">
         <CardHeader className="text-center space-y-4">
-          <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#00aced] to-[#0090c5] bg-clip-text text-transparent">
             Malaysia First Schedule Poisons List
           </CardTitle>
           <CardDescription className="text-slate-600 max-w-2xl mx-auto text-base">
@@ -201,57 +229,97 @@ export default function PoisonScheduleSearch() {
                     placeholder="Search by medication name..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 border-slate-200 focus:border-blue-500 focus:ring-blue-200"
+                    className="pl-10 border-slate-200 focus:border-[#00aced] focus:ring-[#00aced]/20"
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="h-9">
-                          Filter by Group
-                          <ChevronDown className="ml-2 h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start" className="w-56">
-                        <div className="p-2">
-                          {GROUPS.map((group) => (
-                            <label
-                              key={group.id}
-                              className="flex items-center space-x-2 p-2 hover:bg-slate-100 rounded-md cursor-pointer"
-                            >
-                              <Checkbox
-                                id={group.id}
-                                checked={selectedGroups.includes(group.id)}
-                                onCheckedChange={() => toggleGroup(group.id)}
-                              />
-                              <span className="text-sm">{group.label}</span>
-                            </label>
-                          ))}
+                <div className="flex flex-wrap items-center gap-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className="h-9 border border-dashed border-slate-300 hover:border-[#00aced] hover:text-[#00aced] transition-colors"
+                      >
+                        <Plus className="mr-2 h-4 w-4" />
+                        Add Filter
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-72">
+                      <div className="p-2">
+                        <div className="space-y-2">
+                          {FILTER_GROUPS.map((group) => {
+                            const Icon = group.icon
+                            return (
+                              <label
+                                key={group.id}
+                                className="flex items-center space-x-2 p-2 hover:bg-slate-100 rounded-md cursor-pointer"
+                              >
+                                <Checkbox
+                                  id={group.id}
+                                  checked={selectedFilters.includes(group.id)}
+                                  onCheckedChange={() => toggleFilter(group.id)}
+                                  className="border-slate-300 data-[state=checked]:bg-[#00aced] data-[state=checked]:border-[#00aced]"
+                                />
+                                <div className="flex flex-1 items-center justify-between">
+                                  <div className="flex items-center space-x-2">
+                                    <Icon className="h-4 w-4 text-slate-500" />
+                                    <span className="text-sm font-medium">{group.label}</span>
+                                  </div>
+                                  <span className="text-xs text-slate-500">
+                                    {filterCounts[group.id]}
+                                  </span>
+                                </div>
+                              </label>
+                            )
+                          })}
                         </div>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                    {selectedGroups.length > 0 && (
+                      </div>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  {selectedFilters.length > 0 && (
+                    <>
+                      {selectedFilters.map((filterId) => {
+                        const group = FILTER_GROUPS.find(g => g.id === filterId)!
+                        const Icon = group.icon
+                        return (
+                          <Badge
+                            key={filterId}
+                            variant="secondary"
+                            className="bg-[#00aced]/10 text-[#00aced] hover:bg-[#00aced]/20"
+                          >
+                            <Icon className="mr-1 h-3 w-3" />
+                            {group.label}
+                            <button
+                              onClick={() => removeFilter(filterId)}
+                              className="ml-1 hover:bg-[#00aced]/20 rounded"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
+                          </Badge>
+                        )
+                      })}
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={resetFilters}
                         className="h-9 px-2 text-slate-600 hover:text-slate-900"
                       >
-                        Reset
-                        <X className="ml-2 h-4 w-4" />
+                        Clear {selectedFilters.length} selected
                       </Button>
-                    )}
+                    </>
+                  )}
+
+                  <div className="ml-auto">
+                    <InfoDialog />
                   </div>
-                  <InfoDialog />
                 </div>
               </div>
 
               <div ref={resultsRef} className="space-y-4">
                 {loading ? (
                   <div className="text-center py-12">
-                    <Loader2 className="h-8 w-8 animate-spin text-blue-500 mx-auto" />
+                    <Loader2 className="h-8 w-8 animate-spin text-[#00aced] mx-auto" />
                     <p className="mt-4 text-slate-600">Loading poison schedule data...</p>
                   </div>
                 ) : filteredData.length > 0 ? (
@@ -266,7 +334,7 @@ export default function PoisonScheduleSearch() {
                       >
                         <Card className={cn(
                           "overflow-hidden transition-all duration-200",
-                          expandedItem === index && "ring-2 ring-blue-500"
+                          expandedItem === index && "ring-2 ring-[#00aced]"
                         )}>
                           <button
                             onClick={() => setExpandedItem(expandedItem === index ? null : index)}
@@ -274,7 +342,7 @@ export default function PoisonScheduleSearch() {
                             className={cn(
                               "w-full px-6 py-4 flex items-start justify-between transition-colors",
                               expandedItem === index 
-                                ? "bg-blue-50" 
+                                ? "bg-[#00aced]/5" 
                                 : "hover:bg-slate-50"
                             )}
                             aria-expanded={expandedItem === index}
@@ -285,14 +353,14 @@ export default function PoisonScheduleSearch() {
                                   {item.Names}
                                 </span>
                                 {item.Group && (
-                                  <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                                  <Badge variant="secondary" className="bg-[#00aced]/10 text-[#00aced]">
                                     {item.Group}
                                   </Badge>
                                 )}
                               </div>
                             </div>
                             {expandedItem === index ? (
-                              <ChevronUp className="flex-shrink-0 text-blue-500" size={20} />
+                              <ChevronUp className="flex-shrink-0 text-[#00aced]" size={20} />
                             ) : (
                               <ChevronDown className="flex-shrink-0 text-slate-400" size={20} />
                             )}
@@ -307,11 +375,11 @@ export default function PoisonScheduleSearch() {
                                 transition={{ duration: 0.2 }}
                                 className="border-t border-slate-200"
                               >
-                                <div className="px-6 py-4 bg-gradient-to-b from-blue-50/50">
+                                <div className="px-6 py-4 bg-gradient-to-b from-[#00aced]/5">
                                   <div className="grid gap-6">
                                     {item["Group Description"] && (
                                       <section>
-                                        <h4 className="text-sm font-semibold uppercase tracking-wide text-blue-600 mb-3">
+                                        <h4 className="text-sm font-semibold uppercase tracking-wide text-[#00aced] mb-3">
                                           Classification Details
                                         </h4>
                                         <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
@@ -324,7 +392,7 @@ export default function PoisonScheduleSearch() {
 
                                     {item["Part II"] && item["Part II"] !== "-" && (
                                       <section>
-                                        <h4 className="text-sm font-semibold uppercase tracking-wide text-blue-600 mb-3">
+                                        <h4 className="text-sm font-semibold uppercase tracking-wide text-[#00aced] mb-3">
                                           Part II
                                         </h4>
                                         <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
@@ -335,7 +403,7 @@ export default function PoisonScheduleSearch() {
 
                                     {item.Exempt && item.Exempt !== "-" && (
                                       <section>
-                                        <h4 className="text-sm font-semibold uppercase tracking-wide text-blue-600 mb-3">
+                                        <h4 className="text-sm font-semibold uppercase tracking-wide text-[#00aced] mb-3">
                                           Exemptions
                                         </h4>
                                         <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
@@ -359,7 +427,7 @@ export default function PoisonScheduleSearch() {
                     </div>
                     <h3 className="text-lg font-semibold mb-2 text-slate-900">No Results Found</h3>
                     <p className="text-slate-600 mb-4">
-                      We couldn't find any poisons matching "{searchTerm}".
+                      We couldn't find any poisons matching your criteria.
                     </p>
                     <div className="space-y-2 text-sm text-slate-500">
                       <p>Try:</p>
@@ -367,7 +435,7 @@ export default function PoisonScheduleSearch() {
                         <li>Checking for typos</li>
                         <li>Using fewer keywords</li>
                         <li>Using different search terms</li>
-                        <li>Adjusting the group filters</li>
+                        <li>Adjusting the filters</li>
                       </ul>
                     </div>
                   </Card>
@@ -385,7 +453,7 @@ export default function PoisonScheduleSearch() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+            className="fixed bottom-8 right-8 p-3 bg-[#00aced] hover:bg-[#0090c5] text-white rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#00aced] focus:ring-offset-2"
             aria-label="Scroll to top"
           >
             <ArrowUp size={24} />
