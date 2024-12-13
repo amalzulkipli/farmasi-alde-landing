@@ -109,7 +109,7 @@ export default function PoisonScheduleSearch() {
           },
           error: () => setError("Error parsing poison schedule data")
         })
-      } catch (_err) {
+      } catch {
         setError("Failed to load poison schedule data")
       } finally {
         setLoading(false)
