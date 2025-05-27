@@ -39,11 +39,11 @@ interface PoisonData {
 const CSV_URL = "/data/first-schedule-poisons-04.02.2015.csv"
 
 const FILTER_GROUPS = [
-  { id: "groupA", label: "Group A", icon: Circle },
-  { id: "groupB", label: "Group B", icon: Circle },
-  { id: "groupC", label: "Group C", icon: Circle },
-  { id: "groupD", label: "Group D", icon: Circle },
-  { id: "exempt", label: "Exempt", icon: Ban },
+  { id: "groupA", label: "Group A", icon: Circle, color: "#fdc35f", bgColor: "#fdc35f/10", hoverBg: "#fdc35f/20" },
+  { id: "groupB", label: "Group B", icon: Circle, color: "#ffdb15", bgColor: "#ffdb15/10", hoverBg: "#ffdb15/20" },
+  { id: "groupC", label: "Group C", icon: Circle, color: "#18e3a1", bgColor: "#18e3a1/10", hoverBg: "#18e3a1/20" },
+  { id: "groupD", label: "Group D", icon: Circle, color: "#efa8f8", bgColor: "#efa8f8/10", hoverBg: "#efa8f8/20" },
+  { id: "exempt", label: "Exempt", icon: Ban, color: "#f66767", bgColor: "#f66767/10", hoverBg: "#f66767/20" },
 ] as const
 
 type FilterGroup = typeof FILTER_GROUPS[number]["id"]
@@ -197,6 +197,22 @@ export default function PoisonScheduleSearch() {
     )
   }
 
+  // First, let's create a helper function to get group colors
+  const getGroupColors = (groupName: string) => {
+    switch(groupName) {
+      case 'Group A':
+        return { color: '#fdc35f', bg: '#fdc35f/10', hoverColor: '#fdc35f' }
+      case 'Group B':
+        return { color: '#ffdb15', bg: '#ffdb15/10', hoverColor: '#ffdb15' }
+      case 'Group C':
+        return { color: '#18e3a1', bg: '#18e3a1/10', hoverColor: '#18e3a1' }
+      case 'Group D':
+        return { color: '#efa8f8', bg: '#efa8f8/10', hoverColor: '#efa8f8' }
+      default:
+        return { color: '#f66767', bg: '#f66767/10', hoverColor: '#f66767' }
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 md:p-8">
       <Card className="max-w-5xl mx-auto border-[#00aced]/30">
@@ -244,7 +260,7 @@ export default function PoisonScheduleSearch() {
                         Add Filter
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="w-72">
+                    <DropdownMenuContent align="start" className="w-72 bg-white">
                       <div className="p-2">
                         <div className="space-y-2">
                           {FILTER_GROUPS.map((group) => {
@@ -262,7 +278,13 @@ export default function PoisonScheduleSearch() {
                                 />
                                 <div className="flex flex-1 items-center justify-between">
                                   <div className="flex items-center space-x-2">
-                                    <Icon className="h-4 w-4 text-slate-500" />
+                                    <Icon 
+                                      className="h-4 w-4" 
+                                      style={{ 
+                                        color: group.color,
+                                        fill: group.id === "exempt" ? "none" : group.color 
+                                      }} 
+                                    />
                                     <span className="text-sm font-medium">{group.label}</span>
                                   </div>
                                   <span className="text-xs text-slate-500">
@@ -286,15 +308,26 @@ export default function PoisonScheduleSearch() {
                           <Badge
                             key={filterId}
                             variant="secondary"
-                            className="bg-[#00aced]/10 text-[#00aced] hover:bg-[#00aced]/20"
+                            className={cn(
+                              "w-8 h-8 rounded-full p-0 flex items-center justify-center",
+                              `bg-[${group.bgColor}] hover:bg-[${group.hoverBg}]`
+                            )}
                           >
-                            <Icon className="mr-1 h-3 w-3" />
-                            {group.label}
+                            <Icon 
+                              className="h-4 w-4" 
+                              style={{ 
+                                color: group.color,
+                                fill: group.id === "exempt" ? "none" : group.color 
+                              }}
+                            />
                             <button
-                              onClick={() => removeFilter(filterId)}
-                              className="ml-1 hover:bg-[#00aced]/20 rounded"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                removeFilter(filterId)
+                              }}
+                              className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center justify-center"
                             >
-                              <X className="h-3 w-3" />
+                              <X className="h-2.5 w-2.5" />
                             </button>
                           </Badge>
                         )
@@ -353,7 +386,22 @@ export default function PoisonScheduleSearch() {
                                   {item.Names}
                                 </span>
                                 {item.Group && (
-                                  <Badge variant="secondary" className="bg-[#00aced]/10 text-[#00aced]">
+                                  <Badge
+                                    variant="secondary"
+                                    className="text-sm font-medium transition-colors duration-200 bg-[#00aced]/10 text-[#00aced]"
+                                    style={{
+                                      '--hover-bg': getGroupColors(item.Group).color,
+                                      '--hover-color': 'black',
+                                    } as React.CSSProperties}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.backgroundColor = getGroupColors(item.Group).color;
+                                      e.currentTarget.style.color = 'black';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.backgroundColor = '';
+                                      e.currentTarget.style.color = '';
+                                    }}
+                                  >
                                     {item.Group}
                                   </Badge>
                                 )}

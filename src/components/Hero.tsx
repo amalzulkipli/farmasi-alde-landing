@@ -25,7 +25,7 @@ export default function Hero() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button asChild size="lg">
-              <Link href="#services">Explore Our Services</Link>
+              <Link href="#services" className="text-white font-bold">Explore Our Services</Link>
             </Button>
           </div>
         </div>

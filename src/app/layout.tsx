@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Nunito, Nunito_Sans } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import '../styles/globals.css'
 
 const nunito = Nunito({ 
@@ -24,7 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`scroll-smooth ${nunito.variable} ${nunitoSans.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }

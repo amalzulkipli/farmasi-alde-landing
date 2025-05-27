@@ -85,7 +85,7 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-            <Link href="#contact">Contact Us</Link>
+            <Link href="#contact" className="text-white font-bold">Contact Us</Link>
           </Button>
         </div>
       </nav>
