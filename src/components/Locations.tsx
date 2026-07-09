@@ -20,7 +20,7 @@ const locations = [
     name: 'Farmasi Alde Salak Tinggi',
     address: 'Desa Sri Qaseh, 30, Jln Sri Qaseh Permai, 43900 Sepang, Selangor',
     hours: '9:30 am–9:30 pm (Daily)',
-    phone: '017-214 0488',
+    phone: '017-648 4050',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.0524839288395!2d101.71841607475458!3d2.8052360975132387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdc7581150b3c1%3A0x809c926d5426b6d8!2sFarmasi%20Alde%20Salak%20Tinggi!5e0!3m2!1sen!2smy!4v1684304391717!5m2!1sen!2smy',
     social: {
       facebook: 'https://www.facebook.com/farmasialde.salaktinggi/',
