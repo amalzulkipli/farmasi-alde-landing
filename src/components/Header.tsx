@@ -15,9 +15,10 @@ import {
 } from "@/components/ui/sheet"
 
 const navigation = [
-  { name: "Services", href: "#services" },
-  { name: "Products", href: "#products" },
-  { name: "Locations", href: "#locations" },
+  { name: "Services", href: "/#services" },
+  { name: "Products", href: "/#products" },
+  { name: "About", href: "/#about" },
+  { name: "Locations", href: "/#locations" },
 ]
 
 export default function Header() {
@@ -85,7 +86,7 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-            <Link href="#locations" className="text-white font-bold">Contact Us</Link>
+            <Link href="/#contact" className="text-white font-bold">Contact Us</Link>
           </Button>
         </div>
       </nav>

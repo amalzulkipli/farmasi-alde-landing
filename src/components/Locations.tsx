@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPin, Clock, Phone, Facebook, Instagram } from "lucide-react"
+import { MapPin, Clock, Phone, Mail, Facebook, Instagram } from "lucide-react"
 import Link from "next/link"
 
 const locations = [
@@ -9,6 +9,7 @@ const locations = [
     address: 'No 3 Jln SD1 1/1 Taman Seri Dagang, Kampung Bukit Changgang, 42700 Banting, Selangor',
     hours: '9 am–9 pm (Daily)',
     phone: '017-874 8600',
+    email: 'farmasialdebc@gmail.com',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.6583359372897!2d101.61370737475506!3d2.8302289975076087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb98c7c164589%3A0x9520d98c8143c0e8!2sFarmasi%20Alde%20Bukit%20Changgang!5e0!3m2!1sen!2smy!4v1684304454305!5m2!1sen!2smy',
     social: {
       facebook: 'https://www.facebook.com/farmasialde/',
@@ -21,6 +22,7 @@ const locations = [
     address: 'Desa Sri Qaseh, 30, Jln Sri Qaseh Permai, 43900 Sepang, Selangor',
     hours: '9:30 am–9:30 pm (Daily)',
     phone: '017-648 4050',
+    email: 'farmasialdesalaktinggi@gmail.com',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.0524839288395!2d101.71841607475458!3d2.8052360975132387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdc7581150b3c1%3A0x809c926d5426b6d8!2sFarmasi%20Alde%20Salak%20Tinggi!5e0!3m2!1sen!2smy!4v1684304391717!5m2!1sen!2smy',
     social: {
       facebook: 'https://www.facebook.com/farmasialde.salaktinggi/',
@@ -33,6 +35,7 @@ const locations = [
 export default function Locations() {
   return (
     <div id="locations" className="py-24 sm:py-32 bg-gradient-to-b from-white to-gray-50">
+      <span id="contact" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center mb-16">
           <h2 className="text-base font-semibold leading-7 text-[#00aced]">Our Locations</h2>
@@ -40,7 +43,8 @@ export default function Locations() {
             Visit Us Today
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Find a Farmasi Alde location near you for all your healthcare needs.
+            Find a Farmasi Alde location near you for all your healthcare needs. Call, message
+            or email the branch directly and a pharmacist will get back to you.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -73,6 +77,12 @@ export default function Locations() {
                     <Phone className="h-6 w-6 text-[#00aced] flex-shrink-0 mr-3" />
                     <Link href={`tel:${location.phone.replace(/\s/g, '')}`} className="text-gray-600 hover:text-[#00aced] transition-colors">
                       {location.phone}
+                    </Link>
+                  </div>
+                  <div className="flex items-center">
+                    <Mail className="h-6 w-6 text-[#00aced] flex-shrink-0 mr-3" />
+                    <Link href={`mailto:${location.email}`} className="text-gray-600 hover:text-[#00aced] transition-colors break-all">
+                      {location.email}
                     </Link>
                   </div>
                 </div>
