@@ -1,7 +1,5 @@
 "use client"
 
-import { Building2 } from "lucide-react"
-
 export default function About() {
   return (
     <div id="about" className="py-24 sm:py-32 bg-white">
@@ -26,29 +24,6 @@ export default function About() {
               pharmacists give medication counselling, run health screenings, and advise on
               chronic disease management.
             </p>
-          </div>
-
-          <div className="mt-12 rounded-2xl bg-gray-50 p-8 shadow-md">
-            <div className="flex items-start">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#00aced]/20 mr-4">
-                <Building2 className="h-6 w-6 text-[#00aced]" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-900">
-                  Registered business
-                </h3>
-                <p className="mt-3 text-gray-600">
-                  FARMASI ALDE SDN. BHD. 202201018007 (1463704-M)
-                </p>
-                <p className="mt-1 text-gray-600">
-                  No 3, Jalan SD1 1/1, Taman Seri Dagang, Kampung Bukit Changgang, 42700 Banting,
-                  Selangor
-                </p>
-                <p className="mt-4 text-gray-600">
-                  Farmasi Alde Salak Tinggi is operated by ALDE ALLL STAR PLT (LLP0042893-LGN).
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -38,11 +38,11 @@ export default function Footer() {
           ))}
         </nav>
         <div className="mt-10 text-center">
-          <p className="text-sm leading-6 text-gray-400">
-            Farmasi Alde Bukit Changgang is operated by FARMASI ALDE SDN. BHD. 202201018007 (1463704-M).
+          <p className="text-sm leading-5 text-gray-400">
+            FARMASI ALDE SDN. BHD.
           </p>
-          <p className="text-sm leading-6 text-gray-400">
-            Farmasi Alde Salak Tinggi is operated by ALDE ALLL STAR PLT (LLP0042893-LGN).
+          <p className="text-xs leading-5 text-gray-400 mt-1">
+            202201018007 (1463704-M)
           </p>
           <p className="text-xs leading-5 text-gray-400 mt-4">
             &copy; {new Date().getFullYear()} Farmasi Alde. All rights reserved.

@@ -4,23 +4,44 @@ Brochure site for the two Farmasi Alde pharmacy outlets, live at https://farmasi
 Next.js 15 App Router, TypeScript, Tailwind, shadcn/ui primitives in `src/components/ui/`.
 No cart and no checkout. One marketing page at `src/app/page.tsx` plus a few sub-routes.
 
-## Which company operates what
+## Which company appears on the site
 
-The site names two operating entities and must keep naming both. Getting this wrong is
-what held up a payment gateway application in August 2026.
+The footer names exactly one company, and it is the only registration number anywhere on
+the site:
+
+```
+FARMASI ALDE SDN. BHD.
+202201018007 (1463704-M)
+```
+
+Do not add a second one without asking. Getting this wrong is what held up a payment
+gateway application in August 2026, when the footer named a dormant third company.
+
+Per SSM, the two outlets have different operators:
 
 | Outlet | Operated by | Registration |
 |---|---|---|
 | Bukit Changgang (Banting) | FARMASI ALDE SDN. BHD. | 202201018007 (1463704-M) |
 | Salak Tinggi (Sepang) | ALDE ALLL STAR PLT | LLP0042893-LGN |
 
-`ALDE ALL STAR SDN. BHD. 202401005279 (1551129-D)` is a third, dormant vehicle. It
-operates neither outlet and must not appear on the site. The PLT spells "Alll" with three
-Ls; that is the registered spelling, not a typo.
+The PLT is deliberately absent from the site. Amal's call, 2026-08-27: the Bayarcash
+applicant is the Sdn Bhd, and a reviewer comparing the site to the SSM record should find
+one number, not two competing ones. Revisit only if the PLT needs its own payment gateway,
+in which case give Salak Tinggi its own page with its own footer rather than putting both
+companies back in a shared one.
 
-The `/delivery-policy` and `/refund-policy` routes and the About section carry terms a
-customer can hold the pharmacy to. Do not edit the timeframes, the return window or the
-registration numbers without Amal confirming the new values.
+`ALDE ALL STAR SDN. BHD. 202401005279 (1551129-D)` is a third, dormant vehicle. It
+operates neither outlet and must never appear on the site. The PLT spells "Alll" with
+three Ls; that is the registered spelling, not a typo.
+
+The `/delivery-policy` and `/refund-policy` routes carry terms a customer can hold the
+pharmacy to. Do not edit the timeframes, the return window or the registration number
+without Amal confirming the new values.
+
+The site shows no prices. The branch price list at `nexus.farmasialde.com/harga/fabc` was
+linked and then removed on 2026-08-27; the KYC answers that requirement by stating in the
+Notes field that this is a company profile with no cart, and pointing the payment use case
+at whatever actually collects money. Do not re-add a pricing panel without asking.
 
 ## Deploy
 
