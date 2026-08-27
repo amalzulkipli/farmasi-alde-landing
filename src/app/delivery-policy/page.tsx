@@ -25,8 +25,8 @@ export default function DeliveryPolicyPage() {
 
             <ul className="list-disc space-y-2 pl-6">
               <li>Klang Valley and Selangor: 1 to 2 working days</li>
-              <li>Rest of Peninsular Malaysia: 2 to 4 working days</li>
-              <li>Sabah and Sarawak: 4 to 7 working days</li>
+              <li>Rest of Peninsular Malaysia: 3 to 5 working days</li>
+              <li>Sabah and Sarawak: 5 to 10 working days</li>
               <li>We do not ship outside Malaysia.</li>
             </ul>
 

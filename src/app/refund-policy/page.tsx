@@ -21,7 +21,7 @@ export default function RefundPolicyPage() {
             <section>
               <h2 className="text-xl font-semibold text-gray-900">What can be returned</h2>
               <p className="mt-3">
-                Unopened, unused items in their original packaging, within 7 days of you receiving
+                Unopened, unused items in their original packaging, within 3 days of you receiving
                 them, with proof of purchase.
               </p>
             </section>
