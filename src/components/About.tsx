@@ -12,7 +12,7 @@ export default function About() {
         </div>
 
         <div className="mx-auto max-w-3xl">
-          <div className="space-y-6 text-lg leading-8 text-gray-600">
+          <div className="space-y-6 text-center text-lg leading-8 text-gray-600">
             <p>
               Farmasi Alde is a community pharmacy group serving Banting and Sepang since 2022.
               We run two outlets, Bukit Changgang and Salak Tinggi, each staffed by a registered
