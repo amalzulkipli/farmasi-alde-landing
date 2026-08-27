@@ -1,0 +1,17 @@
+# Cloudflare Pages configuration for farmasialde.com.
+#
+# Top level applies to preview deployments, [env.production] to the production
+# branch. Both need nodejs_compat because @cloudflare/next-on-pages emits a
+# worker that imports node builtins. Production already carried the flag in the
+# dashboard; preview did not, which is why every preview URL returned 503 while
+# the build itself reported success.
+#
+# The build command stays in the dashboard: npx @cloudflare/next-on-pages@1
+
+name = "farmasi-alde-landing"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2025-10-02"
+compatibility_flags = [ "nodejs_compat" ]
+
+[env.production]
+compatibility_flags = [ "nodejs_compat" ]
