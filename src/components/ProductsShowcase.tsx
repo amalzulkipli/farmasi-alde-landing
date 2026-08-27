@@ -1,6 +1,7 @@
 "use client"
 
-import { PillBottle, Pill, Stethoscope, Activity } from "lucide-react"
+import { PillBottle, Pill, Stethoscope, Activity, ExternalLink } from "lucide-react"
+import Link from "next/link"
 
 const products = [
   {
@@ -58,6 +59,23 @@ export default function ProductsShowcase() {
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#00aced] to-[#0090c5] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </div>
           ))}
+        </div>
+
+        <div className="mx-auto mt-16 max-w-2xl rounded-2xl bg-white p-8 text-center shadow-md">
+          <h3 className="text-xl font-semibold text-gray-900">Prices</h3>
+          <p className="mt-3 text-gray-600">
+            Item prices are listed in Ringgit Malaysia (RM) on our branch price list. Prices are
+            updated as stock changes, so check the list for the current figure before you order.
+          </p>
+          <Link
+            href="https://nexus.farmasialde.com/harga/fabc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center rounded-full bg-[#00aced] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0090c5]"
+          >
+            Bukit Changgang price list
+            <ExternalLink className="ml-2 h-4 w-4" />
+          </Link>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import ValueProposition from '@/components/ValueProposition'
 import ServicesGrid from '@/components/ServicesGrid'
 import ProductsShowcase from '@/components/ProductsShowcase'
+import About from '@/components/About'
 import Locations from '@/components/Locations'
 import Footer from '@/components/Footer'
 
@@ -15,6 +16,7 @@ export default function Home() {
         <ValueProposition />
         <ServicesGrid />
         <ProductsShowcase />
+        <About />
         <Locations />
       </main>
       <Footer />

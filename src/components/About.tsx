@@ -1,0 +1,57 @@
+"use client"
+
+import { Building2 } from "lucide-react"
+
+export default function About() {
+  return (
+    <div id="about" className="py-24 sm:py-32 bg-white">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl lg:text-center mb-16">
+          <h2 className="text-base font-semibold leading-7 text-[#00aced]">About Us</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            About Farmasi Alde
+          </p>
+        </div>
+
+        <div className="mx-auto max-w-3xl">
+          <div className="space-y-6 text-lg leading-8 text-gray-600">
+            <p>
+              Farmasi Alde is a community pharmacy group serving Banting and Sepang since 2022.
+              We run two outlets, Bukit Changgang and Salak Tinggi, each staffed by a registered
+              pharmacist and open every day.
+            </p>
+            <p>
+              We dispense prescription and over-the-counter medicines, stock vitamins and
+              supplements, and carry home medical equipment and health monitoring devices. Our
+              pharmacists give medication counselling, run health screenings, and advise on
+              chronic disease management.
+            </p>
+          </div>
+
+          <div className="mt-12 rounded-2xl bg-gray-50 p-8 shadow-md">
+            <div className="flex items-start">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#00aced]/20 mr-4">
+                <Building2 className="h-6 w-6 text-[#00aced]" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-900">
+                  Registered business
+                </h3>
+                <p className="mt-3 text-gray-600">
+                  FARMASI ALDE SDN. BHD. 202201018007 (1463704-M)
+                </p>
+                <p className="mt-1 text-gray-600">
+                  No 3, Jalan SD1 1/1, Taman Seri Dagang, Kampung Bukit Changgang, 42700 Banting,
+                  Selangor
+                </p>
+                <p className="mt-4 text-gray-600">
+                  Farmasi Alde Salak Tinggi is operated by ALDE ALLL STAR PLT (LLP0042893-LGN).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
