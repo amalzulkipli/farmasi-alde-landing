@@ -11,9 +11,6 @@ export const metadata: Metadata = {
     "Program Saringan Kesihatan, Promosi Merdeka 2026. Sabtu 26 September 2026, 9 pagi hingga 9 malam di Farmasi Alde Bukit Changgang. Pakej dari RM55.",
 }
 
-const MAPS_URL =
-  "https://maps.google.com/?q=Farmasi+Alde+Bukit+Changgang,+No+3,+Jalan+SD1+1/1,+Taman+Seri+Dagang,+42700+Banting,+Selangor"
-
 export default function MerdekaScreeningPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[#f9f9f9]">
@@ -32,40 +29,8 @@ export default function MerdekaScreeningPage() {
           />
         </div>
 
-        {/* Facts as chips, not paragraphs */}
-        <div className="flex flex-wrap gap-2 text-[12.5px]">
-          <span className="rounded-full border bg-white px-3 py-1.5 font-semibold text-gray-800">
-            Sabtu, 26 Sept 2026
-          </span>
-          <span className="rounded-full border bg-white px-3 py-1.5 font-semibold text-gray-800">
-            9 pagi &ndash; 9 malam
-          </span>
-          <a
-            href={MAPS_URL}
-            className="rounded-full border bg-white px-3 py-1.5 font-semibold text-[#00aced]"
-          >
-            Bukit Changgang &middot; peta
-          </a>
-          <span className="rounded-full border border-[#00aced]/30 bg-[#00aced]/10 px-3 py-1.5 font-semibold text-[#0090c5]">
-            Early Bird hingga 12 Sept
-          </span>
-        </div>
-
         {/* Pricing, immediately */}
         <EventPackages />
-
-        {/* Everything else, compressed to one card */}
-        <div className="rounded-lg border bg-white p-4 text-[12.5px] leading-5 text-gray-700">
-          <div className="font-bold text-gray-900">Sebelum datang</div>
-          <p className="mt-1">
-            Puasa 8 hingga 10 jam, air kosong dibenarkan. Bawa kad pengenalan. Elak minuman
-            manis, kopi dan rokok. Ubat harian teruskan seperti biasa.
-          </p>
-          <div className="mt-3 border-t pt-3">
-            Semua pakej termasuk pengambilan darah oleh kakitangan terlatih, ujian di makmal
-            bertauliah, keputusan dijelaskan dalam bahasa mudah, dan rujukan doktor jika perlu.
-          </div>
-        </div>
 
         {/* Register */}
         <section id="daftar" className="scroll-mt-20">
