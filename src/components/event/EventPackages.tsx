@@ -1,5 +1,7 @@
+import EarlyBirdBar from "./EarlyBirdBar"
+
 const PACKAGES = [
-  { key: "basic", name: "Basic", price: 55, was: null },
+  { key: "basic", name: "Basic", price: 55, was: 65 },
   { key: "premium", name: "Premium", price: 75, was: 99 },
   { key: "men", name: "Men's", price: 175, was: 199 },
   { key: "women", name: "Women's", price: 180, was: 219 },
@@ -76,6 +78,10 @@ export default function EventPackages() {
         <span className="text-[11px] text-gray-400 sm:hidden">leret →</span>
       </div>
 
+      <div className="mb-3">
+        <EarlyBirdBar />
+      </div>
+
       <div className="relative w-full overflow-x-auto rounded-lg border bg-white">
         <table className="w-full border-collapse text-[12.5px]">
           <thead>
@@ -106,6 +112,9 @@ export default function EventPackages() {
                       } text-gray-900`}
                     >
                       RM{p.price}
+                    </div>
+                    <div className="mt-1 inline-block rounded bg-[#00aced]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#0090c5]">
+                      Early Bird
                     </div>
                   </th>
                 )
