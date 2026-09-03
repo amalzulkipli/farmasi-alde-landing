@@ -1,3 +1,5 @@
+import { Fragment } from "react"
+
 import EarlyBirdBar from "./EarlyBirdBar"
 
 const PACKAGES = [
@@ -130,14 +132,19 @@ export default function EventPackages() {
 
           <tbody>
             {GROUPS.map((group) => (
-              <>
-                <tr key={group.title}>
+              <Fragment key={group.title}>
+                <tr>
+                  {/* The cell spans the full table width, so it cannot be the
+                      sticky box: there is nothing for it to stick against and
+                      the label scrolls away. Pin a fit-width child instead. */}
                   <th
                     scope="colgroup"
                     colSpan={PACKAGES.length + 1}
-                    className="sticky left-0 bg-gray-50 px-3 py-1.5 text-left text-[10.5px] font-bold uppercase tracking-[0.06em] text-gray-500"
+                    className="bg-gray-50 p-0 text-left"
                   >
-                    {group.title}
+                    <div className="sticky left-0 w-fit px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.06em] text-gray-500">
+                      {group.title}
+                    </div>
                   </th>
                 </tr>
                 {group.rows.map((row) => (
@@ -157,7 +164,7 @@ export default function EventPackages() {
                     ))}
                   </tr>
                 ))}
-              </>
+              </Fragment>
             ))}
 
             <tr className="border-t bg-gray-50">
