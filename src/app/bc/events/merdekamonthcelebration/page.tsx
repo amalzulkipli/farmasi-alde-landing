@@ -8,7 +8,7 @@ import RegistrationEmbed from "@/components/event/RegistrationEmbed"
 export const metadata: Metadata = {
   title: "Celebrate Freedom, Embrace Health | Farmasi Alde Bukit Changgang",
   description:
-    "Program Saringan Kesihatan, Promosi Merdeka 2026. Sabtu 26 September 2026, 9 pagi hingga 9 malam di Farmasi Alde Bukit Changgang. Pakej dari RM55.",
+    "Program Saringan Kesihatan, Promosi Merdeka 2026. Sabtu 26 September 2026, 9 pagi hingga 1 tengah hari di Farmasi Alde Bukit Changgang. Pakej dari RM55.",
 }
 
 export default function MerdekaScreeningPage() {
@@ -20,10 +20,10 @@ export default function MerdekaScreeningPage() {
         {/* The poster is the hero. No re-typed headline. */}
         <div className="overflow-hidden rounded-lg border bg-white shadow-[0_1px_2px_rgba(0,0,0,.05)]">
           <Image
-            src="/events/merdeka-2026.png"
+            src="/events/merdeka-2026.jpg"
             alt="Celebrate Freedom, Embrace Health. Program Saringan Kesihatan Promosi Merdeka 2026 di Farmasi Alde Bukit Changgang, 26 September 2026."
-            width={675}
-            height={1200}
+            width={900}
+            height={1600}
             priority
             className="block h-auto w-full"
           />

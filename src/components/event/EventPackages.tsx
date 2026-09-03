@@ -3,8 +3,8 @@ import EarlyBirdBar from "./EarlyBirdBar"
 const PACKAGES = [
   { key: "basic", name: "Basic", price: 55, was: 65 },
   { key: "premium", name: "Premium", price: 75, was: 99 },
-  { key: "men", name: "Men's", price: 175, was: 199 },
-  { key: "women", name: "Women's", price: 180, was: 219 },
+  { key: "men", name: "Pro Male", price: 175, was: 199 },
+  { key: "women", name: "Pro Female", price: 180, was: 219 },
 ] as const
 
 type Key = (typeof PACKAGES)[number]["key"]
@@ -15,34 +15,40 @@ const GROUPS: { title: string; rows: Row[] }[] = [
   {
     title: "Asas",
     rows: [
+      { test: "Full Blood Count (FBC)", in: ["basic", "premium", "men", "women"] },
       { test: "Glucose (gula)", in: ["basic", "premium", "men", "women"] },
       { test: "HbA1c (gula 3 bulan)", in: ["basic", "premium", "men", "women"] },
       { test: "Lipid Profile (kolesterol)", in: ["basic", "premium", "men", "women"] },
       { test: "Renal Function (buah pinggang)", in: ["basic", "premium", "men", "women"] },
       { test: "Liver Function (hati)", in: ["basic", "premium", "men", "women"] },
       { test: "Urine FEME (air kencing)", in: ["basic", "premium", "men", "women"] },
-      { test: "TSH (tiroid)", in: ["basic", "premium", "men", "women"] },
     ],
   },
   {
     title: "Tambahan Premium",
     rows: [
       { test: "Blood Grouping (kumpulan darah)", in: ["premium", "men", "women"] },
-      { test: "HBs Ag / Ab (hepatitis B)", in: ["premium", "men", "women"] },
+      { test: "TSH (tiroid)", in: ["premium", "men", "women"] },
       { test: "Syphilis RPR (sifilis)", in: ["premium", "men", "women"] },
+      { test: "HBs Ag / Ab (hepatitis B)", in: ["premium", "men", "women"] },
       { test: "Rheumatoid Factor (sendi)", in: ["premium", "men", "women"] },
     ],
   },
   {
     title: "Penanda Kanser",
     rows: [
-      { test: "CEA (usus)", in: ["premium", "men", "women"] },
-      { test: "Alpha Fetoprotein (hati)", in: ["men"] },
+      { test: "CEA (usus)", in: ["men", "women"] },
+      { test: "Alpha Fetoprotein (hati)", in: ["men", "women"] },
       { test: "PSA (prostat)", in: ["men"] },
       { test: "CA19-9 (pankreas)", in: ["men", "women"] },
       { test: "CA125 (ovari)", in: ["women"] },
       { test: "CA15-3 (payudara)", in: ["women"] },
-      { test: "HIV I & II", in: ["women"] },
+    ],
+  },
+  {
+    title: "Saringan Jangkitan",
+    rows: [
+      { test: "HIV I & II", in: ["men", "women"] },
     ],
   },
 ]
@@ -181,7 +187,8 @@ export default function EventPackages() {
 
       <p className="mt-2.5 text-[11.5px] leading-4 text-gray-500">
         Premium ialah Basic dan lima ujian lagi, <b className="text-[#00aced]">tambah RM20 sahaja</b>.
-        Men&rsquo;s dan Women&rsquo;s termasuk semua ujian Premium, tambah penanda kanser mengikut jantina.
+        Pro Male dan Pro Female termasuk semua ujian Premium, tambah penanda kanser mengikut
+        jantina dan saringan HIV.
       </p>
     </section>
   )
